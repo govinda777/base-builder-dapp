@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Missions Deploy - Galxe Based Initiate & Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="flex justify-between items-center py-16">
+                <div>
+                    <h1 class="text-primary">Base Missions Deploy</h1>
+                    <p class="text-secondary">Complete as missões Galxe Based Initiate & Based Builder</p>
+                </div>
+                <button id="connectWallet" class="btn btn--primary">
+                    Conectar Carteira
+                </button>
+            </div>
+        </header>
+
+        <!-- Wallet Status -->
+        <div id="walletStatus" class="card mb-24 hidden">
+            <div class="card__body">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="font-medium">Carteira Conectada</p>
+                        <p id="walletAddress" class="text-secondary"></p>
+                        <p id="walletBalance" class="text-secondary"></p>
+                    </div>
+                    <div id="networkStatus" class="status status--info">
+                        Verificando rede...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Missions Info -->
+        <section class="missions-section mb-32">
+            <h2 class="mb-16">Missões Galxe</h2>
+            <div class="missions-grid">
+                <div class="card mission-card">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3>Based Initiate</h3>
+                            <span class="status status--info">Iniciante</span>
+                        </div>
+                        <p class="mb-12">Deploy 1 smart contract na rede Base</p>
+                        <p class="text-secondary mb-16">Recompensa: Papel 'Based Initiate' no Discord da Base</p>
+                        <div id="initiateProgress" class="progress-bar">
+                            <div class="progress-bar__fill" style="width: 0%"></div>
+                            <span class="progress-bar__text">0/1 contratos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mission-card">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3>Based Builder</h3>
+                            <span class="status status--warning">Intermediário</span>
+                        </div>
+                        <p class="mb-12">Deploy 5 smart contracts na rede Base</p>
+                        <p class="text-secondary mb-16">Recompensa: Papel 'Based Builder' no Discord da Base</p>
+                        <div id="builderProgress" class="progress-bar">
+                            <div class="progress-bar__fill" style="width: 0%"></div>
+                            <span class="progress-bar__text">0/5 contratos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prerequisites -->
+        <section class="prerequisites-section mb-32">
+            <h2 class="mb-16">Pré-requisitos</h2>
+            <div class="card">
+                <div class="card__body">
+                    <ul class="requirements-list">
+                        <li>✅ Carteira MetaMask ou compatível instalada</li>
+                        <li>✅ Conectado à rede Base Sepolia (Chain ID: 84532)</li>
+                        <li>⚠️ ETH testnet para pagar gas fees</li>
+                    </ul>
+                    <div class="faucets-section mt-16">
+                        <h4 class="mb-12">Obter ETH Testnet:</h4>
+                        <div class="flex gap-8 flex-wrap">
+                            <a href="https://portal.cdp.coinbase.com/products/faucet" target="_blank" class="btn btn--outline btn--sm">Coinbase Faucet</a>
+                            <a href="https://faucet.quicknode.com/base/sepolia" target="_blank" class="btn btn--outline btn--sm">QuickNode Faucet</a>
+                            <a href="https://faucets.chain.link/base-sepolia" target="_blank" class="btn btn--outline btn--sm">Chainlink Faucet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deploy Interface -->
+        <section class="deploy-section mb-32">
+            <div class="flex justify-between items-center mb-16">
+                <h2>Deploy de Contratos</h2>
+                <button id="deployAllBtn" class="btn btn--primary" disabled>
+                    Deploy Todos os Contratos
+                </button>
+            </div>
+            
+            <div class="contracts-grid">
+                <div class="card contract-card" data-contract="HelloWorld">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h4>HelloWorld</h4>
+                                <span class="status status--info">Básico</span>
+                            </div>
+                            <div class="contract-status" id="status-HelloWorld">
+                                <span class="status status--info">Pronto</span>
+                            </div>
+                        </div>
+                        <p class="mb-12">Contrato básico que retorna saudações personalizadas</p>
+                        <ul class="features-list mb-16">
+                            <li>Saudação inicial</li>
+                            <li>Alteração de mensagem</li>
+                            <li>Saudação personalizada</li>
+                        </ul>
+                        <div class="flex gap-8">
+                            <button class="btn btn--secondary deploy-btn" data-contract="HelloWorld">
+                                Deploy
+                            </button>
+                            <a href="#" class="btn btn--outline btn--sm view-contract hidden" target="_blank">
+                                Ver no BaseScan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card contract-card" data-contract="SimpleStorage">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h4>SimpleStorage</h4>
+                                <span class="status status--info">Básico</span>
+                            </div>
+                            <div class="contract-status" id="status-SimpleStorage">
+                                <span class="status status--info">Pronto</span>
+                            </div>
+                        </div>
+                        <p class="mb-12">Armazena e manipula números inteiros</p>
+                        <ul class="features-list mb-16">
+                            <li>Armazenar números</li>
+                            <li>Incrementar valores</li>
+                            <li>Multiplicar por fator</li>
+                        </ul>
+                        <div class="flex gap-8">
+                            <button class="btn btn--secondary deploy-btn" data-contract="SimpleStorage">
+                                Deploy
+                            </button>
+                            <a href="#" class="btn btn--outline btn--sm view-contract hidden" target="_blank">
+                                Ver no BaseScan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card contract-card" data-contract="Counter">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h4>Counter</h4>
+                                <span class="status status--info">Básico</span>
+                            </div>
+                            <div class="contract-status" id="status-Counter">
+                                <span class="status status--info">Pronto</span>
+                            </div>
+                        </div>
+                        <p class="mb-12">Contador simples com incremento e decremento</p>
+                        <ul class="features-list mb-16">
+                            <li>Incrementar contador</li>
+                            <li>Decrementar contador</li>
+                            <li>Reset para zero</li>
+                            <li>Adicionar valores</li>
+                        </ul>
+                        <div class="flex gap-8">
+                            <button class="btn btn--secondary deploy-btn" data-contract="Counter">
+                                Deploy
+                            </button>
+                            <a href="#" class="btn btn--outline btn--sm view-contract hidden" target="_blank">
+                                Ver no BaseScan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card contract-card" data-contract="SimpleNFT">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h4>SimpleNFT</h4>
+                                <span class="status status--warning">Intermediário</span>
+                            </div>
+                            <div class="contract-status" id="status-SimpleNFT">
+                                <span class="status status--info">Pronto</span>
+                            </div>
+                        </div>
+                        <p class="mb-12">NFT básico compatível com padrão ERC721</p>
+                        <ul class="features-list mb-16">
+                            <li>Mint NFTs</li>
+                            <li>Transfer tokens</li>
+                            <li>Metadata customizável</li>
+                            <li>Supply limitado</li>
+                        </ul>
+                        <div class="flex gap-8">
+                            <button class="btn btn--secondary deploy-btn" data-contract="SimpleNFT">
+                                Deploy
+                            </button>
+                            <a href="#" class="btn btn--outline btn--sm view-contract hidden" target="_blank">
+                                Ver no BaseScan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card contract-card" data-contract="SimpleToken">
+                    <div class="card__body">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h4>SimpleToken</h4>
+                                <span class="status status--warning">Intermediário</span>
+                            </div>
+                            <div class="contract-status" id="status-SimpleToken">
+                                <span class="status status--info">Pronto</span>
+                            </div>
+                        </div>
+                        <p class="mb-12">Token ERC20 com funcionalidades de mint e burn</p>
+                        <ul class="features-list mb-16">
+                            <li>Mint com pagamento</li>
+                            <li>Burn tokens</li>
+                            <li>Transfer tokens</li>
+                            <li>Supply controlado</li>
+                        </ul>
+                        <div class="flex gap-8">
+                            <button class="btn btn--secondary deploy-btn" data-contract="SimpleToken">
+                                Deploy
+                            </button>
+                            <a href="#" class="btn btn--outline btn--sm view-contract hidden" target="_blank">
+                                Ver no BaseScan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="resources-section mb-32">
+            <h2 class="mb-16">Recursos Úteis</h2>
+            <div class="resources-grid">
+                <div class="card">
+                    <div class="card__body">
+                        <h4 class="mb-8">Documentação</h4>
+                        <ul class="resource-links">
+                            <li><a href="https://docs.base.org/" target="_blank">Documentação da Base</a></li>
+                            <li><a href="https://discord.gg/buildonbase" target="_blank">Discord da Base</a></li>
+                            <li><a href="https://basescan.org/" target="_blank">BaseScan Explorer</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card__body">
+                        <h4 class="mb-8">FAQ</h4>
+                        <details class="faq-item">
+                            <summary>Como obter ETH testnet?</summary>
+                            <p>Use os faucets listados acima. Você pode solicitar ETH testnet uma vez por dia.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Quanto custa cada deploy?</summary>
+                            <p>Os custos variam, mas geralmente ficam entre 0.001-0.01 ETH por contrato.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Como claim as recompensas?</summary>
+                            <p>Após fazer os deploys, acesse a Galxe e complete as missões para ganhar os papéis no Discord.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-24">
+            <p class="text-secondary">Feito para a comunidade Base. Deploy seus contratos e complete as missões Galxe!</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

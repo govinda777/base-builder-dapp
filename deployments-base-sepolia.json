@@ -1,0 +1,27 @@
+{
+  "network": "base-sepolia",
+  "deployer": "0x17eDfB8a794ec4f13190401EF7aF1c17f3cc90c5",
+  "timestamp": "2025-05-30T21:41:09.063Z",
+  "contracts": [
+    {
+      "name": "HelloWorld",
+      "address": "0x7568D4029dcB49f6a790A4bbf689b72C0065122C"
+    },
+    {
+      "name": "SimpleStorage",
+      "address": "0x5B8BF3bf315BD388c18DbaF0Efa4Eb19494fF8a7"
+    },
+    {
+      "name": "Counter",
+      "address": "0x6Db6519380eA2F7E1b8202177D0d34B3d5e92195"
+    },
+    {
+      "name": "SimpleNFT",
+      "address": "0x2BAd356052730644d7fd0fcdBec9691E07D30b1e"
+    },
+    {
+      "name": "SimpleToken",
+      "address": "0xf5E16Ec01965590A90ccc1F875747eE08Bd82403"
+    }
+  ]
+}
