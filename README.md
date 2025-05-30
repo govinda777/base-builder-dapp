@@ -44,19 +44,98 @@ base-builder-quest/
 - **Carteira Web3** (MetaMask, Coinbase Wallet, etc.)
 - **ETH na rede Base Sepolia** (testnet)
 
-### 2. Instalação
+## Como executar o projeto base-builder-dapp usando Yarn
+
+Você pode rodar o projeto base-builder-dapp localmente usando Yarn em vez de npm, já que o Yarn é totalmente compatível com projetos Node.js que usam `package.json`[2][5]. Veja o passo a passo adaptado para Yarn:
+
+---
+
+### **1. Pré-requisitos**
+
+- Node.js instalado (versão 18 ou superior recomendada)
+- Yarn instalado (`npm install -g yarn`)
+
+---
+
+### **2. Clone o repositório**
 
 ```bash
-# Clonar ou criar o projeto
-mkdir base-builder-quest
-cd base-builder-quest
-
-# Instalar dependências
-npm install
-
-# Copiar arquivo de ambiente
-cp .env.example .env
+git clone https://github.com/govinda777/base-builder-dapp.git
+cd base-builder-dapp
 ```
+
+---
+
+### **3. Instale as dependências**
+
+```bash
+yarn
+```
+Isso instalará todas as dependências listadas no `package.json` e criará um arquivo `yarn.lock`[2][5].
+
+---
+
+### **4. Configure as variáveis de ambiente**
+
+- Copie o arquivo de exemplo:
+  ```bash
+  cp .env.example .env
+  ```
+- Edite o arquivo `.env` e preencha com sua chave privada de teste e (opcionalmente) a chave da BaseScan.
+
+---
+
+### **5. Compile os contratos**
+
+```bash
+yarn compile
+```
+Esse comando executa o script de compilação dos contratos Solidity.
+
+---
+
+### **6. Execute os testes**
+
+```bash
+yarn test
+```
+Isso roda os testes automatizados do projeto.
+
+---
+
+### **7. Faça deploy dos contratos**
+
+- Para deploy em Base Sepolia (testnet):
+  ```bash
+  yarn deploy:sepolia
+  ```
+- Para deploy individual de um contrato, use:
+  ```bash
+  yarn hardhat run scripts/deploy-single.js --network base-sepolia -- 
+  ```
+  Substitua `` pelo nome do contrato desejado (ex: `HelloWorld`).
+
+---
+
+### **8. (Opcional) Verifique contratos no BaseScan**
+
+Se configurou a chave da BaseScan no `.env`, rode:
+```bash
+yarn verify
+```
+
+---
+
+### **Resumo dos comandos Yarn equivalentes ao npm**
+
+| npm                | Yarn               |
+|--------------------|--------------------|
+| npm install        | yarn               |
+| npm run build      | yarn build         |
+| npm run test       | yarn test          |
+| npm run    | yarn       |
+
+Yarn pode ser usado em qualquer projeto Node.js sem necessidade de alterar o `package.json`[2].
 
 ### 3. Configurar Variáveis de Ambiente
 
@@ -80,40 +159,6 @@ Você precisa de ETH na rede Base Sepolia para pagar as taxas de gas. Use um dos
 - **[Chainstack Faucet](https://faucet.chainstack.com/base-sepolia-faucet)**
 - **[QuickNode Faucet](https://faucet.quicknode.com/base/sepolia)**
 - **[Alchemy Faucet](https://sepoliafaucet.com/)**
-
-## 🚀 Como Usar
-
-### Compilar os Contratos
-
-```bash
-npm run compile
-```
-
-### Executar Testes
-
-```bash
-npm run test
-```
-
-### Deploy na Base Sepolia (Testnet)
-
-**Deploy de todos os contratos de uma vez:**
-```bash
-npm run deploy:sepolia
-```
-
-**Deploy individual de um contrato:**
-```bash
-# Exemplos:
-npx hardhat run scripts/deploy-single.js --network base-sepolia -- HelloWorld
-npx hardhat run scripts/deploy-single.js --network base-sepolia -- SimpleNFT
-```
-
-### Verificar Contratos no BaseScan
-
-```bash
-npm run verify
-```
 
 ## 📄 Descrição dos Contratos
 
